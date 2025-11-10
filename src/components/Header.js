@@ -1,8 +1,10 @@
-import {ThemeContext} from "../../contexts/ThemeContext";
-import {useContext} from "react";
+// import {ThemeContext} from "../../contexts/ThemeContext";
+// import {useContext} from "react";
+import {useTheme} from "../../hooks/useTheme";
 
 export default function Header({theme}) {
- const [isDark, setIsDark] = useContext(ThemeContext);
+ /*const [isDark, setIsDark] = useContext(ThemeContext);*/
+ const [isDark, setIsDark] = useTheme();
  // const [isDark, setIsDark] = theme;
 
   // if(isDark){
