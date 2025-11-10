@@ -1,8 +1,12 @@
-import React from "react";
+import {ThemeProvider, ThemeContext} from "../../contexts/ThemeContext";
+import {useContext} from "react";
 
 const Contact = () => {
+     const [isDark] = useContext(ThemeContext);
     return (
-        <h1> Contact us now!! </h1>
+        <main className= {`${isDark? "dark": " "}`}>
+            <h1> Contact us now!! </h1>
+        </main>
     )
 }
 export default Contact;
