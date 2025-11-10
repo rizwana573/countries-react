@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import './CountryDetail.css'
 import Shimmer from "./Shimmer"
-import {useParams, Link} from "react-router-dom"
+import {useParams, Link, useLocation, useOutletContext} from "react-router-dom"
 
 export default function CountryDetail() {
   //const countryName = new URLSearchParams(location.search).get('name');
   const params = useParams();
-const countryName = params.country;
+  const countryName = params.country;
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
+  const {state}= useLocation();
+  const [isDark] = useOutletContext();
 
-  useEffect(() => {
-    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
-      .then((res) => res.json())
-      .then(([data]) => {
-        setCountryData({
+ //console.log("isDark", isDark);
+
+  const updateCountryDetails = data => {
+setCountryData({
           name: data.name.common,
           nativeName: Object.values(data.name.nativeName)[0].common,
           population: data.population,
@@ -39,8 +40,20 @@ const countryName = params.country;
         }
         ))
         .then((borders)=> {
-            setCountryData((prevState) => ({...prevState, borders}))
+           setTimeout(()=> setCountryData((prevState) => ({...prevState, borders}))) 
         })
+  }
+
+  useEffect(() => {
+    if(state){
+      updateCountryDetails(state);
+      return;
+    }
+    fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
+      .then((res) => res.json())
+      .then(([data]) => {
+        updateCountryDetails(data);
+        return;
       })
 
       .catch(err =>{
@@ -54,7 +67,7 @@ const countryName = params.country;
   return countryData === null ? (
    <Shimmer />
   ) : (
-    <main>
+    <main className={`${isDark? "dark" :  " "}`}>
       <div className="country-details-container">
         <span className="back-button" onClick = {()=> history.back()}>
           <i className="fa-solid fa-arrow-left"></i>&nbsp; Back
