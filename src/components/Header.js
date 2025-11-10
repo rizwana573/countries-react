@@ -1,6 +1,10 @@
-export default function Header({theme}) {
+import {ThemeContext} from "../../contexts/ThemeContext";
+import {useContext} from "react";
 
-  const [isDark, setIsDark] = theme;
+export default function Header({theme}) {
+ const [isDark, setIsDark] = useContext(ThemeContext);
+ // const [isDark, setIsDark] = theme;
+
   // if(isDark){
   //   document.body.classList.add("dark");
   // }

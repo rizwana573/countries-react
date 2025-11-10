@@ -11,9 +11,9 @@ const App = () => {
       console.log(a);
   return (
     <ThemeContext.Provider value={[isDark, setIsDark]}>
-      <Header theme={[isDark, setIsDark]}/>
+      <Header />
       {/* <main className={`${isDark ? 'dark': ' '}`}> */}
-        <Outlet context={[isDark, setIsDark]}/>
+        <Outlet/>
       {/* </main> */}
       <Footer />
     </ThemeContext.Provider>

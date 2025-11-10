@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './CountryDetail.css'
 import Shimmer from "./Shimmer"
 import {useParams, Link, useLocation, useOutletContext} from "react-router-dom"
+import {ThemeContext} from "../../contexts/ThemeContext"
 
 export default function CountryDetail() {
   //const countryName = new URLSearchParams(location.search).get('name');
@@ -10,8 +11,8 @@ export default function CountryDetail() {
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
   const {state}= useLocation();
-  const [isDark] = useOutletContext();
-
+  //const [isDark] = useOutletContext();
+  const [isDark] = useContext(ThemeContext);
  //console.log("isDark", isDark);
 
   const updateCountryDetails = data => {
@@ -96,7 +97,7 @@ setCountryData({
                 <span className="sub-region"></span>
               </p>
               <p>
-                <b>Capital: {countryData.capital.join(', ')}</b>
+                <b>Capital: {countryData.capital?.join(', ')}</b>
                 <span className="capital"></span>
               </p>
               <p>
