@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import './CountryDetail.css'
-import Shimmer from "./Shimmer"
+import CountryDetailShimmer from "./CountryDetailShimmer"
 import {useParams, Link, useLocation, useOutletContext} from "react-router-dom"
 import {ThemeContext} from "../../contexts/ThemeContext"
 
@@ -18,15 +18,15 @@ export default function CountryDetail() {
   const updateCountryDetails = data => {
 setCountryData({
           name: data.name.common,
-          nativeName: Object.values(data.name.nativeName)[0].common,
+          nativeName: Object.values(data.name.nativeName || {})[0]?.common,
           population: data.population,
           region: data.region,
           subregion: data.subregion,
           capital: data.capital,
           flag: data.flags.svg,
           tld: data.tld,
-          languages: Object.values(data.languages).join(', '),
-          currencies: Object.values(data.currencies)
+          languages: Object.values(data.languages|| {}).join(', '),
+          currencies: Object.values(data.currencies|| {})
             .map((currency) => currency.name)
             .join(', '),
             borders: []
@@ -66,7 +66,7 @@ setCountryData({
     return <>Country not found</>
   }
   return countryData === null ? (
-   <Shimmer />
+   <CountryDetailShimmer />
   ) : (
     <main className={`${isDark? "dark" :  " "}`}>
       <div className="country-details-container">

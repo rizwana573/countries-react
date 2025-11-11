@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
 import ShimmerList from "./ShimmerList";
 
-export default function CountriesList({ query, region }) {
+export default function CountriesList({ query }) {
   const [countriesData, setCountriesData] = useState([]);
 
   useEffect(() => {
@@ -25,19 +25,25 @@ export default function CountriesList({ query, region }) {
     //  }
   }, []);
 
-  const filteredCountries = countriesData.filter((country) => {
-    const matchesQuery = country.name.common
-      .toLowerCase()
-      .includes(query.toLowerCase());
-    const matchesRegion =
-      region === "" || country.region.toLowerCase() === region.toLowerCase();
-    return matchesQuery && matchesRegion;
-  });
+  // const filteredCountries = countriesData.filter((country) => {
+  //   const matchesQuery = country.name.common
+  //     .toLowerCase()
+  //     .includes(query.toLowerCase());
+  //   const matchesRegion =
+  //     region === "" || country.region.toLowerCase() === region.toLowerCase();
+  //   return matchesQuery && matchesRegion;
+  // });
+  console.log(query);
   return countriesData.length === 0 ? (
     <ShimmerList />
   ) : (
-    <div className="countries-container">
-      {filteredCountries.map((country) => {
+    <>
+<div className="countries-container">
+      {countriesData.filter((country) => {
+         return country.name.common.toLowerCase().includes(query) || 
+          country.region.toLowerCase().includes(query)
+      })
+      .map((country) => {
         return (
           <CountryCard
             key={country.name.common}
@@ -51,5 +57,7 @@ export default function CountriesList({ query, region }) {
         );
       })}
     </div>
+    </>
+    
   );
 }

@@ -1,87 +1,25 @@
-import React from "react";
-import CountryCard from "./CountryCard"
+import React from 'react'
 
-const ShimmerList = () => {
-    return (
-        <div className="countries-container">
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
-          <CountryCard
-            name=" "
-            flag="https://placeholdit.com/600x400/dddddd/999999"
-            population=" "
-            region=" "
-            capital=" "
-          />
+import './CountriesListShimmer.css'
+
+export default function CountriesListShimmer() {
+  // new Array(10).fill('')
+
+  return (
+    <div className="countries-container">
+      {Array.from({ length: 10 }).map((el, i) => {
+        return (
+          <div key={i} className="country-card shimmer-card">
+            <div className="flag-container"></div>
+            <div className="card-text">
+              <h3 className="card-title"></h3>
+              <p></p>
+              <p></p>
+              <p></p>
+            </div>
           </div>
-        ) 
+        )
+      })}
+    </div>
+  )
 }
-export default ShimmerList;
